@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CappyLingo</title>
+    <title>CapyLingo</title>
     <link rel="stylesheet" href="style.css">
-
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
@@ -14,10 +15,11 @@
     <header>
         <nav class="navbar section-content">
             <a href="#" class="nav-logo">
-                <h2 class="logo-text"> <img src="./pictures/logo.png" alt="Capybara With Glasses"
-                        id="nav-pic">CappyLingo</h2>
+                <h2 class="logo-text"> <img src="./pictures/logo.png" alt="Capybara With Glasses" id="nav-pic">CapyLingo
+                </h2>
             </a>
             <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Home</a>
                 </li>
@@ -31,10 +33,10 @@
                     <a href="#" class="nav-link">Testimonials</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Login</a>
+                    <a href="#" class="nav-link" id="login">Login</a>
                 </li>
             </ul>
-
+            <button id="menu-open-button" class="fas fa-bars"></button>
         </nav>
 
     </header>
@@ -43,7 +45,7 @@
         <section class="hero-section">
             <div class="section-content">
                 <div class="hero-details">
-                    <h1 class="title">CappyLingo</h1>
+                    <h1 class="title">CapyLingo</h1>
                     <h2 class="subtitle">Learn English the Capybara Way: Calm, Confident, and Clever!</h2>
                     <p class="description">CapyLingo adalah platform belajar bahasa Inggris yang menawarkan pengalaman
                         belajar yang santai, efektif, dan menyenangkan. </p>
@@ -53,11 +55,64 @@
                     </div>
                 </div>
                 <div class="hero-image-wrapper">
-                    <img src="./pictures/title_page.png" alt="Cappybara-with-books" class="hero-image">
+                    <img src="./pictures/title_page.png" alt="Capybara-with-books" class="hero-image">
                 </div>
             </div>
         </section>
+        <section class="about-section">
+            <div class="section-content">
+                <div class="about-image-wrapper">
+                    <img src="./pictures/about.png" alt="Capybara-Fun" class="about-image">
+                </div>
+                <div class="about-details">
+                    <h2 class="section-title">About Website</h2>
+                    <p class="text">CapyLingo adalah website virtual laboratorium untuk mendukung pembelajaran bahasa
+                        Inggris di TPB
+                        Institut Teknologi Bandung. Website ini dirancang dengan menggabungkan metode belajar inovatif
+                        untuk meningkatkan keterampilan berbahasa Inggris dengan cara yang menarik. Terinspirasi dari
+                        sifat tenang dan cerdas capybara, CapyLingo mengajak kalian belajar bahasa Inggris tanpa tekanan
+                        dan meningkatkan kepercayaan diri kalian dalam berkomunikasi secara alami. Saya percaya bahwa
+                        belajar bahasa harus menjadi pengalaman yang menyenangkan dan memotivasi, itulah yang CapyLingo
+                        hadirkan.</p>
+                </div>
+
+            </div>
+        </section>
+        <section class="features-section">
+            <div class="section-content">
+                <div class="section-title">
+                    <h3 class="title">Features</h3>
+                </div>
+                <div class="features-content">
+                    <ul class="features-list">
+                        <li class="features-item">
+                            <img src="./pictures/feature-1.png" alt="feature-1" class="features-image">
+                            <h3 class="name">Quiz</h3>
+                            <p class="text">Terdapat berbagai macam tipe soal untuk melatih kemampuan kalian. Mulai dari
+                                grammar, kosa kata, atau pemahaman context.</p>
+                        </li>
+                        <li class="features-item">
+                            <img src="./pictures/feature-2.png" alt="feature-2" class="features-image">
+                            <h3 class="name">Gamifikasi</h3>
+                            <p class="text">Akan ada beragam level yang disesuaikan dengan kemampuan kalian. Semakin
+                                sering
+                                mengerjakan quiz maka level kalian akan semakin meningkat.</p>
+                        </li>
+                        <li class="features-item">
+                            <img src="./pictures/feature-3.png" alt="feature-3" class="features-image">
+                            <h3 class="name">Flashcard</h3>
+                            <p class="text">Untuk membantu kalian mengingat setiap kosakata dalam bahasa Inggris,
+                                terdapat
+                                fitur flashcard yang bisa kalian gunakan.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
