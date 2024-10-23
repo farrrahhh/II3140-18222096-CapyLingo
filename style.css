@@ -447,12 +447,11 @@ button[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   padding: 3%;
-  width: 20%;
+  width: auto;
 }
 
 .sidebar-section .side-logo {
   display: flex;
-  align-items: center;
 }
 
 .sidebar-section .side-logo .logo-text {
@@ -460,7 +459,6 @@ button[type="submit"]:hover {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   display: flex;
-  align-items: center;
 }
 
 .sidebar-section .side-logo #nav-pic {
@@ -511,6 +509,30 @@ button[type="submit"]:hover {
   gap: 20px;
   padding: 5% 5%;
   width: 100%;
+  margin-bottom: 100px;
+}
+
+.level-1-content {
+  animation: moveUp 3s linear infinite;
+  cursor: pointer;
+}
+.inner-circle .level-1 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.level-1-content .level-1:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Menambahkan bayangan saat di-hover */
+}
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Ubah nilai ini untuk menentukan seberapa tinggi elemen bergerak */
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .level-1-content,
@@ -714,6 +736,59 @@ button[type="submit"]:hover {
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-medium);
 }
+/* Vocabularies */
+
+.container-belajar .vocabs-section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 80px; /* Menyebarkan kotak secara merata */
+  padding: 20px; /* Menambah padding di sekitar vocabs-section */
+  width: 80%;
+}
+
+.vocabs {
+  width: 400px;
+  height: 180px; /* Tinggi tetap untuk setiap kotak */
+  display: flex; /* Menggunakan flexbox untuk konten di dalam */
+  align-items: center; /* Mengatur item di tengah vertikal */
+  justify-content: center; /* Mengatur item di tengah horizontal */
+  background-color: #ffb0b0; /* Warna latar belakang default */
+  text-decoration: none; /* Menghapus garis bawah pada tautan */
+  color: #ffffff; /* Warna teks */
+  font-size: 24px; /* Ukuran font */
+  margin: 0 10px; /* Jarak antar kotak */
+  border-radius: 10px; /* Sudut membulat */
+  transition: background-color 0.3s; /* Efek transisi saat hover */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.fruits {
+  background-color: var(--orange-color);
+}
+
+.fruits:hover {
+  background-color: #ffbe75;
+}
+
+.activities {
+  background-color: var(--secondary-color);
+}
+
+.activities:hover {
+  background-color: #ffefa5;
+}
+
+.vegetables:hover {
+  background-color: #ff8c8c;
+}
+
+.vocabs-section p {
+  font-size: var(--font-size-xl);
+  color: var(--dark-color);
+}
 
 /* Responsive media query code for max width 900px */
 @media screen and (max-width: 900px) {
@@ -856,6 +931,7 @@ button[type="submit"]:hover {
   .container-belajar {
     display: flex;
     flex-direction: column-reverse;
+    min-height: 100vh;
   }
 
   .container-belajar .sidebar-section {
@@ -886,6 +962,9 @@ button[type="submit"]:hover {
     min-height: 5vh;
 
     width: 100%;
+    position: fixed;
+    z-index: 4;
+    bottom: 0;
   }
   .container-belajar .sidebar-section .sidebar-menu {
     display: flex;
