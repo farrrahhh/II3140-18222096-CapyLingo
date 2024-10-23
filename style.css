@@ -790,6 +790,67 @@ button[type="submit"]:hover {
   color: var(--dark-color);
 }
 
+/* Isi Quiz */
+.container {
+  display: flex;
+  flex-direction: column;
+  /* Atur menjadi kolom */
+  gap: 20px;
+  /* Spasi antar kolom */
+  width: 80%;
+  /* Lebar kontainer */
+  width: 100%;
+  /* Lebar maksimum */
+  text-align: center;
+  justify-content: center;
+  padding-top: 120px;
+  padding-right: 20%;
+  padding-left: 20%;
+}
+
+.words,
+.definitions {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  /* Lebar 100% agar responsif */
+}
+
+.word,
+.definition {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #eaeaea;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: grab;
+  text-align: center;
+  flex: 1;
+  /* Membuat elemen tumbuh secara merata */
+}
+
+.definition {
+  border: 2px dashed #aaa;
+  min-height: 50px;
+  text-align: center;
+  color: #555;
+}
+
+.drag-over {
+  background-color: #d1ffd1;
+  border: 2px solid #4caf50;
+}
+
+.matched {
+  background-color: #b3ffb3;
+  cursor: not-allowed;
+}
+
+.definitions img {
+  width: 20%;
+}
 /* Responsive media query code for max width 900px */
 @media screen and (max-width: 900px) {
   :root {
@@ -855,6 +916,22 @@ button[type="submit"]:hover {
     padding: 30px 20px 20px;
     flex-direction: column-reverse;
     justify-content: center;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    /* Atur menjadi kolom */
+    gap: 20px;
+    /* Spasi antar kolom */
+    width: 80%;
+    /* Lebar kontainer */
+    width: 100%;
+    /* Lebar maksimum */
+    text-align: center;
+    justify-content: center;
+    padding-top: 120px;
+    padding-right: 3%;
+    padding-left: 3%;
   }
 
   .hero-section .hero-details:is(.subtitle, .description),

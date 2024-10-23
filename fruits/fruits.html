@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag-and-Drop Vocabulary Matching</title>
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -16,131 +16,40 @@
             align-items: center;
             height: 100vh;
         }
+    </style> -->
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            /* Atur menjadi kolom */
-            gap: 20px;
-            /* Spasi antar kolom */
-            width: 80%;
-            /* Lebar kontainer */
-            max-width: 800px;
-            /* Lebar maksimum */
-        }
-
-        .words,
-        .definitions {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            /* Lebar 100% agar responsif */
-        }
-
-        .word,
-        .definition {
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #eaeaea;
-            border: 2px solid transparent;
-            border-radius: 4px;
-            cursor: grab;
-            text-align: center;
-            flex: 1;
-            /* Membuat elemen tumbuh secara merata */
-        }
-
-        .definition {
-            border: 2px dashed #aaa;
-            min-height: 50px;
-            text-align: center;
-            color: #555;
-        }
-
-        .drag-over {
-            background-color: #d1ffd1;
-            border: 2px solid #4CAF50;
-        }
-
-        .matched {
-            background-color: #b3ffb3;
-            cursor: not-allowed;
-        }
-    </style>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar section-content">
+            <a href="../belajar/belajar.html" class="nav-logo">
+                <h2 class="logo-text"> <img src="../pictures/logo.png" alt="Capybara With Glasses"
+                        id="nav-pic">CapyLingo
+                </h2>
+            </a>
+        </nav>
 
+    </header>
+    <!-- Body -->
     <div class="container">
         <div class="words">
             <div class="word" draggable="true" id="word1">Apple</div>
-            <div class="word" draggable="true" id="word2">Book</div>
-            <div class="word" draggable="true" id="word3">Car</div>
+            <div class="word" draggable="true" id="word2">Grape</div>
+            <div class="word" draggable="true" id="word3">Banana</div>
         </div>
 
         <div class="definitions">
-            <div class="definition" id="def1" data-word="Apple">A type of fruit</div>
-            <div class="definition" id="def2" data-word="Book">A set of written or printed pages</div>
-            <div class="definition" id="def3" data-word="Car">A vehicle for transportation</div>
+            <div class="definition" id="def1" data-word="Apple"><img src="../pictures/2.png" alt=""></div>
+            <div class="definition" id="def2" data-word="Grape"><img src="../pictures/3.png" alt=""></div>
+            <div class="definition" id="def3" data-word="Banana"><img src="../pictures/4.png" alt=""></div>
         </div>
     </div>
 
-    <script>
-        const words = document.querySelectorAll('.word');
-        const definitions = document.querySelectorAll('.definition');
 
-        words.forEach(word => {
-            word.addEventListener('dragstart', dragStart);
-            word.addEventListener('dragend', dragEnd);
-        });
-
-        definitions.forEach(definition => {
-            definition.addEventListener('dragover', dragOver);
-            definition.addEventListener('dragenter', dragEnter);
-            definition.addEventListener('dragleave', dragLeave);
-            definition.addEventListener('drop', dragDrop);
-        });
-
-        let draggedWord = null;
-
-        function dragStart(e) {
-            draggedWord = e.target;
-            setTimeout(() => e.target.style.display = 'none', 0);
-        }
-
-        function dragEnd(e) {
-            setTimeout(() => e.target.style.display = 'block', 0);
-            draggedWord = null;
-        }
-
-        function dragOver(e) {
-            e.preventDefault();
-        }
-
-        function dragEnter(e) {
-            e.preventDefault();
-            this.classList.add('drag-over');
-        }
-
-        function dragLeave() {
-            this.classList.remove('drag-over');
-        }
-
-        function dragDrop() {
-            this.classList.remove('drag-over');
-
-            const wordText = draggedWord.innerText;
-            const correctWord = this.getAttribute('data-word');
-
-            if (wordText === correctWord) {
-                this.innerText = wordText; // Move the word to the definition box
-                draggedWord.classList.add('matched'); // Mark word as matched
-                draggedWord.setAttribute('draggable', false); // Make word un-draggable
-            }
-        }
-    </script>
+    <script src="./script.js"></script>
 
 </body>
 
