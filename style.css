@@ -509,7 +509,7 @@ button[type="submit"]:hover {
   gap: 20px;
   padding: 5% 5%;
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .level-1-content {
@@ -737,21 +737,20 @@ button[type="submit"]:hover {
   font-weight: var(--font-weight-medium);
 }
 /* Vocabularies */
-
 .container-belajar .vocabs-section {
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  gap: 80px; /* Menyebarkan kotak secara merata */
+  gap: 50px; /* Menyebarkan kotak secara merata */
   padding: 20px; /* Menambah padding di sekitar vocabs-section */
   width: 80%;
 }
 
 .vocabs {
-  width: 400px;
-  height: 180px; /* Tinggi tetap untuk setiap kotak */
+  width: 500px; /* Ukuran kontainer lebih besar */
+  height: 250px; /* Tinggi kontainer lebih besar */
   display: flex; /* Menggunakan flexbox untuk konten di dalam */
   align-items: center; /* Mengatur item di tengah vertikal */
   justify-content: center; /* Mengatur item di tengah horizontal */
@@ -759,10 +758,17 @@ button[type="submit"]:hover {
   text-decoration: none; /* Menghapus garis bawah pada tautan */
   color: #ffffff; /* Warna teks */
   font-size: 24px; /* Ukuran font */
-  margin: 0 10px; /* Jarak antar kotak */
+  color: #333;
+  font-family: Poppins;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   border-radius: 10px; /* Sudut membulat */
   transition: background-color 0.3s; /* Efek transisi saat hover */
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden; /* Mencegah konten melampaui batas kontainer */
+  padding: 30px;
 }
 
 .fruits {
@@ -788,6 +794,19 @@ button[type="submit"]:hover {
 .vocabs-section p {
   font-size: var(--font-size-xl);
   color: var(--dark-color);
+}
+
+.vocabs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vocabs-item img {
+  max-width: 40%;
+  max-height: 20%;
+  height: auto;
+  border-radius: 10px;
 }
 
 /* Isi Quiz */
@@ -851,6 +870,7 @@ button[type="submit"]:hover {
 .definitions img {
   width: 20%;
 }
+
 /* Responsive media query code for max width 900px */
 @media screen and (max-width: 900px) {
   :root {
@@ -1049,6 +1069,50 @@ button[type="submit"]:hover {
     text-align: center;
     justify-content: space-around;
     width: 100%;
+  }
+  .level-section {
+    margin-bottom: 100px;
+  }
+
+  /* Vocab */
+
+  .container-belajar .vocabs-section {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    width: 100%;
+    height: 120vh;
+    padding: auto;
+    position: absolute;
+    top: -0.5;
+  }
+
+  .vocabs {
+    width: 95%; /* Ukuran kontainer vocabs */
+    height: 200px; /* Tinggi kontainer vocabs */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 24px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .vocabs-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Posisikan gambar dan teks di tengah */
+    justify-content: center;
+  }
+
+  .vocabs-item img {
+    max-width: 60%;
+    max-height: 100px;
+    height: auto;
+    border-radius: 10px;
   }
 }
 
