@@ -627,6 +627,10 @@ button[type="submit"]:hover {
   width: 50%;
 }
 
+.content-left h2 {
+  text-align: center;
+}
+
 .mantra-today img {
   width: 80%;
   height: 80%;
@@ -1045,6 +1049,13 @@ button[type="submit"]:hover {
     display: none;
     height: 0px;
     width: 0px;
+  }
+  .mantra-section .mantra-content {
+    padding: 3px;
+  }
+
+  .mantra-today .content-right {
+    padding-right: 2px;
   }
 
   .sidebar-section .side-logo {
