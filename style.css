@@ -1020,6 +1020,15 @@ button[type="submit"]:hover {
     border-radius: var(--border-radius-m);
     padding: 40px;
   }
+  .input-field input {
+    width: 100%;
+    padding: 15px;
+    font-size: var(--font-size-n);
+    border: 2px solid var(--dark-color);
+    border-radius: var(--border-radius-s);
+    background-color: var(--white-color);
+    transition: all 0.3s ease-in-out;
+  }
 
   .picture-text .form-image-text-wrapper {
     position: absolute;
