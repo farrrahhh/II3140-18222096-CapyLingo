@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../pictures/icon.png" type="image/png">
+    <style>
+        .level-5-content {
+            animation: moveUp 3s linear infinite;
+            cursor: pointer;
+            width: 120px;
+        }
+
+        .inner-circle .level-1,
+        .inner-circle .level-2,
+        .inner-circle .level-3,
+        .inner-circle .level-4 {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .level-1-content .level-1:hover,
+        .level-2-content .level-2:hover,
+        .level-3-content .level-3:hover,
+        .level-4-content .level-4:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            /* Menambahkan bayangan saat di-hover */
+        }
+
+        .level-2-content .outer-circle,
+        .level-1-content .outer-circle,
+        .level-3-content .outer-circle,
+        .level-4-content .outer-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid var(--secondary-color);
+        }
+
+        .level-1 .inner-circle,
+        .level-2 .inner-circle,
+        .level-3 .inner-circle,
+        .level-4 .inner-circle {
+            background-color: var(--orange-color);
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Sidebar -->
+    <div class="container-belajar">
+        <div class="sidebar-section">
+            <a href="#" class="side-logo">
+                <h2 class="logo-text">
+                    <img src="../pictures/logo.png" alt="Capybara With Glasses" id="nav-pic">
+                    CapyLingo
+                </h2>
+            </a>
+            <ul class="sidebar-menu">
+                <li class="side-item">
+                    <a href="#" class="side-link">
+                        <img src="../pictures/home.png" alt="Belajar" class="menu-icon">
+                        <p>Belajar</p>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="../vocab/vocab.html" class="side-link">
+                        <img src="../pictures/flashcard.png" alt="Flashcard" class="menu-icon">
+                        <p>Vocabularies</p>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="../index.html" class="side-link">
+                        <img src="../pictures/out.png" alt="Keluar" class="menu-icon">
+                        <p>Keluar</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="level-section">
+            <a href="../quiz/quiz.html" class="level-1-content right">
+                <div class="outer-circle">
+                    <div class="inner-circle level-1">
+                        <div class="img-inner">
+                            <img src="../pictures/level1.png" alt="Level-1">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="level-2-content center">
+                <div class="outer-circle">
+                    <div class="inner-circle level-2">
+                        <div class="img-inner">
+                            <img src="../pictures/love-2.png" alt="Level-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="level-3-content left">
+                <div class="outer-circle">
+                    <div class="inner-circle level-3">
+                        <div class="img-inner">
+                            <img src="../pictures/book-3.png" alt="Level-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="level-4-content center">
+                <div class="outer-circle">
+                    <div class="inner-circle level-4">
+                        <div class="img-inner">
+                            <img src="../pictures/music-4.png" alt="Level-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="level-5-content right">
+
+                <div class="img-inner">
+                    <img src="../pictures/treasure-5.png" alt="Level-5">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mantra-section">
+            <div class="mantra-content">
+                <h1 class="title">Hello Farah!</h1>
+                <div class="mantra-today">
+                    <div class="content-left">
+                        <img src="../pictures/piala.png" alt="Piala">
+                        <h2>Level 5</h2>
+                    </div>
+                    <div class="content-right">
+
+                        <h2>Today's Mantra</h2>
+                        <p id="todays-mantra">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="mantra-image-wrapper">
+                <img src="../pictures/butterfly.gif" alt="butterfly-gif">
+            </div>
+        </div>
+    </div>
+
+    <script src="./todays-mantra.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- Icons -->
+    <link rel="icon" href="../pictures/icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar section-content">
+            <a href="../index.html" class="nav-logo">
+                <h2 class="logo-text"> <img src="../pictures/logo.png" alt="Capybara With Glasses"
+                        id="nav-pic">CapyLingo
+                </h2>
+            </a>
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#about-section" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#features-section" class="nav-link">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="login">Login</a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+
+        <script src="../script.js"></script>
+
+    </header>
+
+    <!-- Main -->
+    <main>
+        <section class="form-section">
+            <div class="form-picture">
+                <div class="picture-text">
+                    <div class="form-image-text-wrapper">
+                        <img src="../pictures/music.png" alt="">
+                    </div>
+                    <h1 class="title">CapyLingo</h1>
+                    <h2 class="subtitle">Learn English the Capybara Way: Calm, Confident, and Clever!</h2>
+                </div>
+                <div class="form-image-wrapper">
+                    <img src="../pictures/form.png" alt="form-picture">
+                </div>
+            </div>
+            <div class="form-box">
+                <div class="form-details">
+                    <h1 class="title">Sign Up to CapyLingo!</h1>
+                    <p class="subtitle">Ready to sharpen your English skills and have some fun? Let’s get started!</p>
+                </div>
+                <div class="form-content">
+                    <form action="#">
+                        <div class="input-field">
+                            <input type="text">
+                            <label>Username</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password">
+                            <label>Password</label>
+                        </div>
+
+                        <button type="submit">SignUp</button>
+                    </form>
+                    <div class="bottom-link">
+                        <p>Already have account <a href="../login/login.html">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Music -->
+    <audio id="background-music" autoplay loop>
+        <source src="../music/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- JavaScript -->
+    <script src="./signup.js"></script>
+    <script src="../script.js"></script>
+
+</body>
+
+</html>
