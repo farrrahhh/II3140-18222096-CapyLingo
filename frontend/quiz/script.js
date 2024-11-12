@@ -98,14 +98,13 @@ nextButton.addEventListener("click", () => {
     showScore();
   }
 });
+
 async function submitQuizResult() {
   const userId = sessionStorage.getItem("userId");
   if (!userId) {
     alert("User not logged in");
     return;
   }
-
-  console.log("Submitting quiz result..."); // Add logging
 
   try {
     const response = await fetch("http://localhost:3000/api/submit-quiz", {
@@ -140,9 +139,9 @@ function showScore() {
   indicatorElement.innerHTML = `Quiz Complete`;
   // Submit the quiz result to the backend
   submitQuizResult();
-  nextButton.innerHTML = "Back";
+  nextButton.innerHTML = "Kembali ke Halaman Level";
   nextButton.style.display = "block";
-  nextButton.addEventListener("click", redirectToLevelPage);
+  nextButton.onclick = redirectToLevelPage; // Ganti dengan langsung memanggil fungsi
 }
 
 function redirectToLevelPage() {
