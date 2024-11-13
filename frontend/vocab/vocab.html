@@ -20,7 +20,7 @@
             </a>
             <ul class="sidebar-menu">
                 <li class="side-item">
-                    <a href="../belajar/belajar.html" class="side-link">
+                    <a href="#" class="side-link" onclick="redirectToLevelPage()">
                         <img src="../pictures/home.png" alt="Belajar" class="menu-icon">
                         <p>Belajar</p>
                     </a>
@@ -45,26 +45,30 @@
                     <img src="../pictures/watermelon.png" alt="watermelon">
                     <p>Fruits</p>
                 </div>
-
             </a>
             <a href="../vegetables/vegetables.html" class="vocabs vegetables">
-
                 <div class="vocabs-item">
                     <img src="../pictures/eggplant.png" alt="">
                     <p>Vegetables</p>
                 </div>
-
             </a>
             <a href="../activities/activities.html" class="vocabs activities">
                 <div class="vocabs-item">
                     <img src="../pictures/eat.png" alt="">
                     <p>Activities</p>
                 </div>
-
             </a>
         </div>
     </div>
 
+    <script>
+        async function redirectToLevelPage() {
+            const userLevel = sessionStorage.getItem("level") || 1; // Default to level 1 if not set
+
+            // Redirect to the level page
+            window.location.href = `../belajar/level${userLevel}.html`;
+        }
+    </script>
 </body>
 
 </html>

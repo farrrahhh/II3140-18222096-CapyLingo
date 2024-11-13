@@ -588,7 +588,11 @@ button[type="submit"]:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 30%;
+}
+.mantra-today .content-left img {
+  width: 80%;
+  height: auto;
 }
 
 .content-left h2 {

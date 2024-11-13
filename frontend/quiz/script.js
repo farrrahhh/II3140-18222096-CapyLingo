@@ -9,6 +9,9 @@ let score = 0;
 let questions = [];
 
 async function fetchQuizData(level) {
+  // Fetch quiz data based on the level
+  //catch the quizid to session storage
+  sessionStorage.setItem("quizId", level);
   try {
     const response = await fetch(`http://localhost:3000/api/quizzes?level=${level}`);
     const quiz = await response.json();
@@ -101,8 +104,9 @@ nextButton.addEventListener("click", () => {
 
 async function submitQuizResult() {
   const userId = sessionStorage.getItem("userId");
-  if (!userId) {
-    alert("User not logged in");
+  const quizId = sessionStorage.getItem("quizId");
+  if (!userId || !quizId) {
+    alert("User or Quiz not identified");
     return;
   }
 
@@ -114,6 +118,7 @@ async function submitQuizResult() {
       },
       body: JSON.stringify({
         userId: userId,
+        quizId: quizId,
         score: score,
         totalQuestions: questions.length,
       }),
@@ -121,6 +126,7 @@ async function submitQuizResult() {
 
     const result = await response.json();
     if (response.ok) {
+      sessionStorage.setItem("level", result.newLevel); // Update the level in sessionStorage
       alert(result.message);
     } else {
       alert(result.message);
@@ -134,6 +140,29 @@ async function submitQuizResult() {
 function showScore() {
   resetState();
   questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
+  if (score >= 2 && sessionStorage.getItem("level") < 5 && sessionStorage.getItem("level") == sessionStorage.getItem("quizId")) {
+    questionElement.innerHTML += "<br>You passed the quiz! Your level is increased.";
+  } else if (score >= 2 && sessionStorage.getItem("level") == 5) {
+    questionElement.innerHTML += "<br>You have completed all levels!";
+    questionElement.innerHTML += "<br>Capybara says: Congratulations!";
+
+    // Create a container for the image
+    const imgContainer = document.createElement("div");
+    imgContainer.style.textAlign = "center";
+    imgContainer.style.marginTop = "20px"; // Add some space above the image
+
+    // Add image to the container
+    const img = document.createElement("img");
+    img.src = "../pictures/capybara_win.png";
+    img.style.width = "30%";
+    img.style.height = "auto";
+    imgContainer.appendChild(img);
+
+    // Append the container to the question element
+    questionElement.appendChild(imgContainer);
+  } else if (score < 2) {
+    questionElement.innerHTML += "<br>You failed the quiz! Try again!";
+  }
   titleElement.style.display = "none";
   questionElement.style.textAlign = "center";
   indicatorElement.innerHTML = `Quiz Complete`;
@@ -168,35 +197,10 @@ function restartQuiz() {
 }
 
 async function redirectToLevelPage() {
-  const userId = sessionStorage.getItem("userId");
+  const userLevel = sessionStorage.getItem("level");
 
-  if (!userId) {
-    console.error("No userId found in sessionStorage.");
-    alert("User ID is missing. Redirecting to home page.");
-    window.location.href = "../index.html";
-    return;
-  }
-
-  try {
-    const response = await fetch(`http://localhost:3000/api/user/${userId}`); // Adjust URL if needed
-    if (!response.ok) {
-      throw new Error(`Failed to fetch user data. Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const userLevel = data.level;
-
-    if (userLevel) {
-      window.location.href = `../belajar/level${userLevel}.html`;
-    } else {
-      alert("User level not found. Redirecting to home page.");
-      window.location.href = "../index.html";
-    }
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    alert("An error occurred. Redirecting to home page.");
-    window.location.href = "../index.html";
-  }
+  // Redirect to the level page
+  window.location.href = `../belajar/level${userLevel}.html`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

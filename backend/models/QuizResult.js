@@ -34,6 +34,7 @@ const QuizResult = db.define(
     },
   },
   {
+    tableName: "quiz_results", // Ensure the correct table name is used
     timestamps: true,
     createdAt: "completed_at",
     updatedAt: false,

@@ -132,7 +132,7 @@
 
         <div class="mantra-section">
             <div class="mantra-content">
-                <h1 class="title">Hello Farah!</h1>
+                <h1 class="title" id="greeting">Hello Farah!</h1>
                 <div class="mantra-today">
                     <div class="content-left">
                         <img src="../pictures/piala.png" alt="Piala">
@@ -151,7 +151,13 @@
         </div>
     </div>
     <script src="./todays-mantra.js"></script>
-
+    <script>
+        // Mengambil nama pengguna dari sessionStorage dan mengubah teks "Hello Farah!" menjadi nama pengguna yang sesuai
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = sessionStorage.getItem("username") || "User"; // Default ke "User" jika tidak ada username
+            document.getElementById("greeting").textContent = `Hello ${username}!`;
+        });
+    </script>
 </body>
 
 </html>

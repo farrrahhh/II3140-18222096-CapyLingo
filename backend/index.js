@@ -6,7 +6,7 @@ import db from "./config/Database.js";
 import User from "./models/User.js";
 import Quiz from "./models/Quiz.js"; // Import the Quiz model
 import Question from "./models/Question.js"; // Import the Question model
-
+import QuizResult from "./models/QuizResult.js";
 const app = express();
 
 // Middleware
@@ -57,9 +57,10 @@ app.post("/api/signup", async (req, res) => {
     res.status(500).json({ message: "An error occurred while signing up. Please try again." });
   }
 });
+
 // Endpoint to submit quiz score
 app.post("/api/submit-quiz", async (req, res) => {
-  const { userId, score, totalQuestions } = req.body;
+  const { userId, quizId, score, totalQuestions } = req.body;
 
   try {
     const user = await User.findOne({ where: { user_id: userId } });
@@ -68,28 +69,53 @@ app.post("/api/submit-quiz", async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const passingScore = 1;
-    if (score >= passingScore) {
-      const updatedLevel = user.level + 1;
-      const [updated] = await User.update({ level: updatedLevel }, { where: { user_id: userId } });
+    const quizresult = await QuizResult.findOne({ where: { [Op.and]: [{ user_id: userId }, { quiz_id: quizId }] } });
+    const passingScore = 2;
+    let updatedLevel = user.level;
 
-      if (updated) {
-        console.log(`User level updated successfully for user ID ${userId}`);
-        res.status(200).json({
-          message: "Quiz result submitted successfully",
-          newLevel: updatedLevel,
-          score,
+    // Logging for debugging
+    console.log(`User current level: ${user.level}`);
+    console.log(`Quiz ID: ${quizId}`);
+    console.log(`User score: ${score}`);
+    console.log(`Existing quiz result: ${quizresult ? quizresult.score : "No existing result"}`);
+
+    if (score >= passingScore && user.level < 5 && user.level == quizId) {
+      updatedLevel = user.level + 1;
+      await User.update({ level: updatedLevel }, { where: { user_id: userId } });
+
+      // Save the quiz result if it's the user's first attempt
+      if (!quizresult) {
+        await QuizResult.create({
+          user_id: userId,
+          quiz_id: quizId,
+          score: score,
         });
-      } else {
-        console.error(`Failed to update user level for user ID ${userId}`);
-        res.status(500).json({ message: "Failed to update user level" });
       }
-    } else {
-      res.status(200).json({
-        message: "Quiz result submitted, but level not increased",
-        score,
-      });
+    } else if (score >= passingScore && user.level == 5) {
+      // Save the quiz result if the user is at max level and has passed the quiz
+      if (!quizresult) {
+        await QuizResult.create({
+          user_id: userId,
+          quiz_id: quizId,
+          score: score,
+        });
+      }
+    } else if (quizresult && score > quizresult.score) {
+      // Update the quiz result if the new score is higher than the previous one
+      await QuizResult.update({ score: score }, { where: { [Op.and]: [{ user_id: userId }, { quiz_id: quizId }] } });
+    } else if (score < passingScore) {
+      // Return if the score is below the passing threshold
+      return res.status(400).json({ message: "Score is less than passing score" });
+    } else if (quizresult && score <= quizresult.score) {
+      // Do nothing if there is an existing quiz result with a score higher or equal to the new score
+      console.log("Score is not higher than previous attempt, no update performed.");
     }
+
+    res.status(200).json({
+      message: "Quiz result submitted successfully",
+      newLevel: updatedLevel,
+      score,
+    });
   } catch (error) {
     console.error("Error during quiz result submission:", error);
     res.status(500).json({ message: "An error occurred while submitting the quiz result." });
@@ -147,22 +173,6 @@ app.get("/api/quizzes", async (req, res) => {
   }
 });
 
-//endpoint to get user level now
-app.get("/api/user/:userId", async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const user = await User.findOne({ where: { user_id: userId } });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    // Return user level
-    res.status(200).json({ userId: user.user_id, level: user.level });
-  } catch (error) {
-    console.error("Error fetching user level:", error);
-    res.status(500).json({ message: "An error occurred while fetching the user level." });
-  }
-});
 // Start server
 app.listen(3000, () => {
   console.log("Server running on port 3000");
