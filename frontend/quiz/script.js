@@ -137,11 +137,35 @@ function showScore() {
   titleElement.style.display = "none";
   questionElement.style.textAlign = "center";
   indicatorElement.innerHTML = `Quiz Complete`;
-  // Submit the quiz result to the backend
+
+  // Submit the quiz result to the backend only once
   submitQuizResult();
-  nextButton.innerHTML = "Kembali ke Halaman Level";
+
+  nextButton.innerHTML = "Restart";
+  nextButton.removeEventListener("click", showQuestion); // Remove previous event listener
+  nextButton.addEventListener("click", restartQuiz);
   nextButton.style.display = "block";
-  nextButton.onclick = redirectToLevelPage; // Ganti dengan langsung memanggil fungsi
+
+  // Add button to redirect to the level page
+  const redirectButton = document.createElement("button");
+  redirectButton.innerHTML = "Back to The Level Page";
+  redirectButton.classList.add("back");
+  redirectButton.style.display = "block";
+  redirectButton.style.margin = "0 auto";
+  redirectButton.style.marginTop = "10px";
+  redirectButton.style.backgroundColor = "#4CAF50";
+  redirectButton.style.color = "white";
+  redirectButton.style.border = "none";
+  redirectButton.style.borderRadius = "5px";
+  redirectButton.style.padding = "10px 24px";
+  redirectButton.style.cursor = "pointer";
+
+  redirectButton.addEventListener("click", redirectToLevelPage);
+  document.querySelector(".bottom").appendChild(redirectButton);
+}
+
+function restartQuiz() {
+  startQuiz();
 }
 
 function redirectToLevelPage() {
