@@ -143,8 +143,7 @@ function showScore() {
 
   nextButton.innerHTML = "Restart";
   nextButton.removeEventListener("click", showQuestion); // Remove previous event listener
-  nextButton.addEventListener("click", restartQuiz);
-  nextButton.style.display = "block";
+  nextButton.style.display = "none ";
 
   // Add button to redirect to the level page
   const redirectButton = document.createElement("button");
@@ -168,12 +167,34 @@ function restartQuiz() {
   startQuiz();
 }
 
-function redirectToLevelPage() {
-  const userLevel = sessionStorage.getItem("level");
-  if (userLevel) {
-    window.location.href = `../belajar/level${userLevel}.html`;
-  } else {
-    alert("User level not found. Redirecting to home page.");
+async function redirectToLevelPage() {
+  const userId = sessionStorage.getItem("userId");
+
+  if (!userId) {
+    console.error("No userId found in sessionStorage.");
+    alert("User ID is missing. Redirecting to home page.");
+    window.location.href = "../index.html";
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:3000/api/user/${userId}`); // Adjust URL if needed
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user data. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const userLevel = data.level;
+
+    if (userLevel) {
+      window.location.href = `../belajar/level${userLevel}.html`;
+    } else {
+      alert("User level not found. Redirecting to home page.");
+      window.location.href = "../index.html";
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    alert("An error occurred. Redirecting to home page.");
     window.location.href = "../index.html";
   }
 }
