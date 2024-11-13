@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         // Simpan data pengguna yang sudah login di sessionStorage
+        sessionStorage.setItem("token", result.token);
         sessionStorage.setItem("userId", result.userId);
         sessionStorage.setItem("username", result.username);
         sessionStorage.setItem("level", result.level); // Menyimpan level pengguna

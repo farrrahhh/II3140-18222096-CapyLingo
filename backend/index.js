@@ -7,11 +7,34 @@ import User from "./models/User.js";
 import Quiz from "./models/Quiz.js"; // Import the Quiz model
 import Question from "./models/Question.js"; // Import the Question model
 import QuizResult from "./models/QuizResult.js";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config(); // Load environment variables from .env file
+
 const app = express();
+const SECRET_KEY = process.env.SECRET_KEY; // Load the secret key from environment variables
 
 // Middleware
 app.use(cors()); // Enable CORS for all origins
 app.use(express.json()); // Parse JSON request bodies
+
+// Middleware to verify JWT
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (!token) {
+    return res.status(403).json({ message: "No token provided" });
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(500).json({ message: "Failed to authenticate token" });
+    }
+    req.userId = decoded.userId;
+    req.username = decoded.username;
+    req.level = decoded.level;
+    next();
+  });
+};
 
 // Check database connection
 try {
@@ -20,6 +43,15 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+// Sync models with database
+db.sync()
+  .then(() => {
+    console.log("Database synced");
+  })
+  .catch((error) => {
+    console.error("Error syncing database:", error);
+  });
 
 // Endpoint for Sign Up
 app.post("/api/signup", async (req, res) => {
@@ -59,7 +91,7 @@ app.post("/api/signup", async (req, res) => {
 });
 
 // Endpoint to submit quiz score
-app.post("/api/submit-quiz", async (req, res) => {
+app.post("/api/submit-quiz", verifyToken, async (req, res) => {
   const { userId, quizId, score, totalQuestions } = req.body;
 
   try {
@@ -72,12 +104,6 @@ app.post("/api/submit-quiz", async (req, res) => {
     const quizresult = await QuizResult.findOne({ where: { [Op.and]: [{ user_id: userId }, { quiz_id: quizId }] } });
     const passingScore = 2;
     let updatedLevel = user.level;
-
-    // Logging for debugging
-    console.log(`User current level: ${user.level}`);
-    console.log(`Quiz ID: ${quizId}`);
-    console.log(`User score: ${score}`);
-    console.log(`Existing quiz result: ${quizresult ? quizresult.score : "No existing result"}`);
 
     if (score >= passingScore && user.level < 5 && user.level == quizId) {
       updatedLevel = user.level + 1;
@@ -139,12 +165,16 @@ app.post("/api/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Login successful, send user data (user_id, username, level)
+    // Generate JWT
+    const token = jwt.sign({ userId: user.user_id, username: user.username, level: user.level }, SECRET_KEY, { expiresIn: "1h" });
+
+    // Login successful, send token
     res.status(200).json({
       message: "Login successful",
+      token,
       userId: user.user_id,
       username: user.username,
-      level: user.level, // Send the level
+      level: user.level,
     });
   } catch (error) {
     console.error("Error during login:", error);
@@ -152,8 +182,8 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Endpoint to fetch quizzes and questions based on level
-app.get("/api/quizzes", async (req, res) => {
+// Endpoint to fetch quizzes and questions based on level (protected)
+app.get("/api/quizzes", verifyToken, async (req, res) => {
   const { level } = req.query;
 
   try {
@@ -173,7 +203,22 @@ app.get("/api/quizzes", async (req, res) => {
   }
 });
 
+// Endpoint to verify JWT token
+app.get("/api/verify-token", verifyToken, (req, res) => {
+  res.status(200).json({ message: "Token is valid" });
+});
+
 // Start server
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(`Port ${PORT} is already in use`);
+    process.exit(1);
+  } else {
+    console.error(`Server error: ${error}`);
+  }
 });

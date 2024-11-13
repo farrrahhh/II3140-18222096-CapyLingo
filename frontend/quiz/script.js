@@ -10,21 +10,34 @@ let questions = [];
 
 async function fetchQuizData(level) {
   // Fetch quiz data based on the level
-  //catch the quizid to session storage
   sessionStorage.setItem("quizId", level);
+  const token = sessionStorage.getItem("token");
+
   try {
-    const response = await fetch(`http://localhost:3000/api/quizzes?level=${level}`);
+    const response = await fetch(`http://localhost:3000/api/quizzes?level=${level}`, {
+      method: "GET",
+      headers: {
+        Authorization: token, // Include the token in the request headers
+        "Content-Type": "application/json",
+      },
+    });
+
     const quiz = await response.json();
-    questions = quiz.Questions.map((q) => ({
-      question: q.question,
-      answers: [
-        { text: q.option_a, correct: q.correct_option === "A" },
-        { text: q.option_b, correct: q.correct_option === "B" },
-        { text: q.option_c, correct: q.correct_option === "C" },
-        { text: q.option_d, correct: q.correct_option === "D" },
-      ],
-    }));
-    startQuiz();
+    if (response.ok) {
+      questions = quiz.Questions.map((q) => ({
+        question: q.question,
+        answers: [
+          { text: q.option_a, correct: q.correct_option === "A" },
+          { text: q.option_b, correct: q.correct_option === "B" },
+          { text: q.option_c, correct: q.correct_option === "C" },
+          { text: q.option_d, correct: q.correct_option === "D" },
+        ],
+      }));
+      startQuiz();
+    } else {
+      console.error("Error fetching quiz data:", quiz.message);
+      alert("An error occurred while fetching the quiz data. Please try again.");
+    }
   } catch (error) {
     console.error("Error fetching quiz data:", error);
   }
@@ -105,6 +118,7 @@ nextButton.addEventListener("click", () => {
 async function submitQuizResult() {
   const userId = sessionStorage.getItem("userId");
   const quizId = sessionStorage.getItem("quizId");
+  const token = sessionStorage.getItem("token");
   if (!userId || !quizId) {
     alert("User or Quiz not identified");
     return;
@@ -115,6 +129,7 @@ async function submitQuizResult() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token, // Include the token in the request headers
       },
       body: JSON.stringify({
         userId: userId,
@@ -176,7 +191,7 @@ function showScore() {
 
   // Add button to redirect to the level page
   const redirectButton = document.createElement("button");
-  redirectButton.innerHTML = "Back to The Level Page";
+  redirectButton.innerHTML = "Dashboard";
   redirectButton.classList.add("back");
   redirectButton.style.display = "block";
   redirectButton.style.margin = "0 auto";
@@ -187,6 +202,20 @@ function showScore() {
   redirectButton.style.borderRadius = "5px";
   redirectButton.style.padding = "10px 24px";
   redirectButton.style.cursor = "pointer";
+  //make the button to the right side
+  redirectButton.style.position = "absolute";
+  redirectButton.style.right = "25px"; // Atur jarak dari kanan sesuai keinginan
+  redirectButton.style.bottom = "20px"; // Atur jarak dari atas jika perlu
+  //give animation to the button
+  redirectButton.style.transition = "all 0.3s ease";
+  //give shadow to the button
+  redirectButton.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+  //give hover effect
+  redirectButton.style.transform = "translateY(-2px)";
+
+  //font
+  redirectButton.style.fontFamily = "Poppins";
+  redirectButton.style.fontSize = "14px";
 
   redirectButton.addEventListener("click", redirectToLevelPage);
   document.querySelector(".bottom").appendChild(redirectButton);
