@@ -1,8 +1,18 @@
-require("dotenv").config();
-const mysql = require("mysql2");
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
+dotenv.config();
 
-const connection = mysql.createConnection(urlDB);
+const db = new Sequelize(process.env.MYSQLDATABASE, process.env.MYSQLUSER, process.env.MYSQLPASSWORD, {
+  host: process.env.MYSQLHOST,
+  port: process.env.MYSQLPORT,
+  dialect: "mysql",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
-module.exports = connection;
+export default db;
