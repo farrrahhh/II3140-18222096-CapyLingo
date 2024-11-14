@@ -9,11 +9,6 @@
     "routes": [
       { "src": "/api/.*", "dest": "/index.js" }
     ],
-    "functions": {
-      "api/index.js": {
-        "memory": 512,
-        "maxDuration": 10
-      }
-    }
+    
   }
   
