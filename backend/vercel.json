@@ -7,26 +7,13 @@
       }
     ],
     "routes": [
-      {
-        "src": "/api/signup",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/login",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/submit-quiz",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/quizzes",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/api/verify-token",
-        "dest": "/index.js"
+      { "src": "/api/.*", "dest": "/index.js" }
+    ],
+    "functions": {
+      "api/index.js": {
+        "memory": 512,
+        "maxDuration": 10
       }
-    ]
+    }
   }
   
