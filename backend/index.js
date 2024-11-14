@@ -8,7 +8,7 @@ import Question from "./models/Question.js"; // Import the Question model
 import QuizResult from "./models/QuizResult.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import db from "./config/Database.js";
+import db from "./config.js";
 
 dotenv.config(); // Load environment variables from .env file
 
