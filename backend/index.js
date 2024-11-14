@@ -33,12 +33,7 @@ const SECRET_KEY = process.env.SECRET_KEY; // Load the secret key from environme
 
 // Middleware
 app.use(cors()); // Enable CORS for all origins
-const cors = require("cors");
-app.use(
-  cors({
-    origin: "ii3150-18222096-capylingo-production.up.railway.app",
-  })
-);
+
 app.use(express.json()); // Parse JSON request bodies
 
 // Middleware to verify JWT
