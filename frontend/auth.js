@@ -10,7 +10,7 @@ async function checkLogin() {
 
   try {
     // Make a request to a protected endpoint to verify the token
-    const response = await fetch("http://localhost:3000/api/verify-token", {
+    const response = await fetch("ii3150-18222096-capylingo-production.up.railway.app/api/verify-token", {
       method: "GET",
       headers: {
         Authorization: token,
