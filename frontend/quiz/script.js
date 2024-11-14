@@ -14,7 +14,7 @@ async function fetchQuizData(level) {
   const token = sessionStorage.getItem("token");
 
   try {
-    const response = await fetch(`https://capy-lingo-backend.vercel.app?level=${level}`, {
+    const response = await fetch(`https://capy-lingo-backend.vercel.app/api/quizzes?level=${level}`, {
       method: "GET",
       headers: {
         Authorization: token, // Include the token in the request headers
