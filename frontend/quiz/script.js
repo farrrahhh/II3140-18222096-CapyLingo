@@ -22,7 +22,7 @@ async function fetchQuizData(level) {
         "Content-Type": "application/json",
       },
     });
-
+    console.log("Response:", response);
     const quiz = await response.json();
     if (response.ok) {
       questions = quiz.Questions.map((q) => ({
