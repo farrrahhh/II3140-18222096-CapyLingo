@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Kirim data login ke server
-      const response = await fetch("https://capy-lingo-backend.vercel.app//api/login", {
+      const response = await fetch("https://capy-lingo-backend.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
