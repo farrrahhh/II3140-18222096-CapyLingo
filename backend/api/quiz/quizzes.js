@@ -16,6 +16,7 @@ router.get("/", verifyToken, async (req, res) => {
       where: { quiz_id: level },
       include: [{ model: Question, as: "Questions" }],
     });
+    console.log("Quiz:", quiz); // Log data quiz yang ditemukan
 
     if (!quiz) {
       return res.status(404).json({ message: "Quiz not found" });
@@ -23,8 +24,8 @@ router.get("/", verifyToken, async (req, res) => {
 
     res.status(200).json(quiz);
   } catch (error) {
-    console.error("Error fetching quiz:", error);
-    res.status(500).json({ message: "An error occurred while fetching the quiz." });
+    console.error("Error fetching quiz:", error); // Log lebih detail
+    res.status(500).json({ message: "An error occurred while fetching the quiz.", error: error.message });
   }
 });
 
