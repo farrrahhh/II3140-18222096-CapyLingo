@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Kirim data sign-up ke server
-      const response = await fetch("http://localhost:3000/api/signup", {
+      const response = await fetch("https://ii-3150-18222096-capy-lingo-mjpd.vercel.app/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
