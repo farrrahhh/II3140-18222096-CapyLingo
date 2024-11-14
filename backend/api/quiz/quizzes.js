@@ -12,10 +12,6 @@ router.get("/", verifyToken, async (req, res) => {
   const { level } = req.query;
 
   try {
-    if (!level) {
-      return res.status(400).json({ message: "Level is required" });
-    }
-
     const quiz = await Quiz.findOne({
       where: { quiz_id: level },
       include: [{ model: Question, as: "Questions" }],
