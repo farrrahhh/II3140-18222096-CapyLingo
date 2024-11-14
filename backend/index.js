@@ -2,15 +2,32 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 import cors from "cors";
-import db from "./config/Database.js";
 import User from "./models/User.js";
 import Quiz from "./models/Quiz.js"; // Import the Quiz model
 import Question from "./models/Question.js"; // Import the Question model
 import QuizResult from "./models/QuizResult.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-dotenv.config(); // Load environment variables from .env file
+import { Sequelize } from "sequelize";
 
+dotenv.config(); // Load environment variables from .env file
+// Create a new instance of Sequelize and connect to the cloud database
+const db = new Sequelize(
+  process.env.DB_NAME, // Database name
+  process.env.DB_USER, // Database user
+  process.env.DB_PASSWORD, // Database password
+  {
+    host: process.env.DB_HOST, // Hostname (from .env)
+    port: process.env.DB_PORT, // Port (from .env)
+    dialect: "mysql", // Dialect for MySQL
+    logging: false, // Disable SQL logging (optional)
+    ssl: {
+      rejectUnauthorized: true, // Optional SSL settings for secure connections
+    },
+  }
+);
+
+export default db;
 const app = express();
 const SECRET_KEY = process.env.SECRET_KEY; // Load the secret key from environment variables
 
