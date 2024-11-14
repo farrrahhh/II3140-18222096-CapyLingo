@@ -45,15 +45,6 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-// Sync models with database
-db.sync()
-  .then(() => {
-    console.log("Database synced");
-  })
-  .catch((error) => {
-    console.error("Error syncing database:", error);
-  });
-
 // Endpoint for Sign Up
 app.post("/api/signup", async (req, res) => {
   const { username, password } = req.body;
