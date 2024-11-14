@@ -14,7 +14,7 @@ async function fetchQuizData(level) {
   const token = sessionStorage.getItem("token");
 
   try {
-    const response = await fetch(`ii3150-18222096-capylingo-production.up.railway.app?level=${level}`, {
+    const response = await fetch(`https://capy-lingo-backend.vercel.app?level=${level}`, {
       method: "GET",
       headers: {
         Authorization: token, // Include the token in the request headers
@@ -125,7 +125,7 @@ async function submitQuizResult() {
   }
 
   try {
-    const response = await fetch("ii3150-18222096-capylingo-production.up.railway.app/api/submit-quiz", {
+    const response = await fetch("https://capy-lingo-backend.vercel.app//api/submit-quiz", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
