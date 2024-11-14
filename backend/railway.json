@@ -1,0 +1,20 @@
+{
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@railwayjs/docker"
+      }
+    ],
+    "deployments": [
+      {
+        "src": "src/index.js",
+        "use": "@railwayjs/express"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "DATABASE_URL": "mysql://root:oLOoaYbhEYKJAONWLsIXDvuuxRCSKvpj@junction.proxy.rlwy.net:59665/railway",
+      "PORT": "3000"
+    }
+  }
+  
