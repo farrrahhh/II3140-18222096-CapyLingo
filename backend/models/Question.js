@@ -1,6 +1,6 @@
 // models/Question.js
 import { DataTypes } from "sequelize";
-import db from "../config/Database.js";
+import db from "../config.js";
 import Quiz from "./Quiz.js";
 
 const Question = db.define(

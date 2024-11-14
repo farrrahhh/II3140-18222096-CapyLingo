@@ -1,6 +1,6 @@
 // models/QuizResult.js
 import { DataTypes } from "sequelize";
-import db from "../config/Database.js";
+import db from "../config.js";
 import User from "./User.js";
 import Quiz from "./Quiz.js";
 
