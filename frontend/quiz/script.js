@@ -10,6 +10,7 @@ let questions = [];
 
 async function fetchQuizData(level) {
   // Fetch quiz data based on the level
+  console.log("Fetching quiz data for level", level);
   sessionStorage.setItem("quizId", level);
   const token = sessionStorage.getItem("token");
 
