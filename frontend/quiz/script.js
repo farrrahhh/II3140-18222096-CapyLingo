@@ -125,7 +125,7 @@ async function submitQuizResult() {
   }
 
   try {
-    const response = await fetch("https://capy-lingo-backend.vercel.app//api/submit-quiz", {
+    const response = await fetch("https://capy-lingo-backend.vercel.app/api/submit-quiz", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
