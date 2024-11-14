@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Kirim data login ke server
-      const response = await fetch("ii3150-18222096-capylingo-production.up.railway.app", {
+      const response = await fetch("ii3150-18222096-capylingo-production.up.railway.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
