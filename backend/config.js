@@ -8,6 +8,5 @@ const db = new Sequelize(process.env.MYSQLDATABASE, process.env.MYSQLUSER, proce
   dialect: "mysql",
   logging: false,
 });
-sequelize.sync({ force: false }); // Jangan menghapus atau membuat tabel secara otomatis
 
 export default db;
