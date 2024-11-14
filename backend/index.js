@@ -46,7 +46,7 @@ try {
 }
 
 // Endpoint for Sign Up
-app.post("/api/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -83,7 +83,7 @@ app.post("/api/signup", async (req, res) => {
 });
 
 // Endpoint to submit quiz score
-app.post("/api/submit-quiz", verifyToken, async (req, res) => {
+app.post("/submit-quiz", verifyToken, async (req, res) => {
   const { userId, quizId, score, totalQuestions } = req.body;
 
   try {
@@ -141,7 +141,7 @@ app.post("/api/submit-quiz", verifyToken, async (req, res) => {
 });
 
 // Endpoint for Login
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -175,7 +175,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 // Endpoint to fetch quizzes and questions based on level (protected)
-app.get("/api/quizzes", verifyToken, async (req, res) => {
+app.get("/quizzes", verifyToken, async (req, res) => {
   const { level } = req.query;
 
   try {
@@ -196,7 +196,7 @@ app.get("/api/quizzes", verifyToken, async (req, res) => {
 });
 
 // Endpoint to verify JWT token
-app.get("/api/verify-token", verifyToken, (req, res) => {
+app.get("/verify-token", verifyToken, (req, res) => {
   res.status(200).json({ message: "Token is valid" });
 });
 
