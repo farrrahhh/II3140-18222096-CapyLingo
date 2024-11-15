@@ -37,9 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("username", result.username);
         sessionStorage.setItem("level", result.level); // Menyimpan level pengguna
 
-        // Tampilkan pesan sukses dan arahkan ke halaman belajar sesuai level
-        alert(result.message);
-
         // Arahkan ke halaman belajar berdasarkan level
         const level = result.level;
         window.location.href = `../belajar/level${level}.html`; // Menyesuaikan dengan level

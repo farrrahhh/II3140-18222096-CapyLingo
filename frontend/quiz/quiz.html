@@ -21,7 +21,12 @@
         </nav>
     </header>
     <!-- Body -->
+    <div class="quiz-back-button">
+        <a href="#" class="back-button" onclick="redirectToLevelPage()"><img src="../pictures/back-button.png"
+                alt="back"></a>
+    </div>
     <div class="container-quiz">
+
         <div class="app">
             <h1 id="title-quiz">Bacalah dan jawab pertanyaannya!</h1>
             <div class="quiz">
@@ -44,6 +49,14 @@
 
     <script src="./script.js"></script>
     <script src="../auth.js"></script>
+    <script>
+        async function redirectToLevelPage() {
+            const userLevel = sessionStorage.getItem("level") || 1; // Default to level 1 if not set
+
+            // Redirect to the level page
+            window.location.href = `../belajar/level${userLevel}.html`;
+        }
+    </script>
 </body>
 
 </html>

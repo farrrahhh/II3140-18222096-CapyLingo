@@ -51,6 +51,9 @@ router.post("/", verifyToken, async (req, res) => {
     } else if (quizresult && score <= quizresult.score) {
       // Do nothing if there is an existing quiz result with a score higher or equal to the new score
       console.log("Score is not higher than previous attempt, no update performed.");
+    } else {
+      console.error("Error: Invalid quiz result submission");
+      return res.status(400).json({ message: "Invalid quiz result submission" });
     }
 
     res.status(200).json({

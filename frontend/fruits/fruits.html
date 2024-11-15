@@ -14,7 +14,7 @@
     <!-- Header -->
     <header>
         <nav class="navbar section-content">
-            <a href="../belajar/belajar.html" class="nav-logo">
+            <a href="#" class="nav-logo" onclick="redirectToLevelPage()">
                 <h2 class="logo-text"> <img src="../pictures/logo.png" alt="Capybara With Glasses"
                         id="nav-pic">CapyLingo
                 </h2>
@@ -24,6 +24,9 @@
     </header>
     <!-- Body -->
     <div class="container">
+        <div class="vocab-back-button">
+            <a href="../vocab/vocab.html" class="back-button"><img src="../pictures/back-button.png" alt="back"></a>
+        </div>
         <div class="drag-word">
             <h1>Drag the word into the picture!</h1>
         </div>
@@ -44,6 +47,14 @@
 
     <script src="./script.js"></script>
     <script src="../auth.js"></script>
+    <script>
+        async function redirectToLevelPage() {
+            const userLevel = sessionStorage.getItem("level") || 1; // Default to level 1 if not set
+
+            // Redirect to the level page
+            window.location.href = `../belajar/level${userLevel}.html`;
+        }
+    </script>
 
 </body>
 
