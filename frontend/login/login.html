@@ -72,7 +72,7 @@
                             <input type="password">
                             <label>Password</label>
                         </div>
-                        <a href="#" class="forgot-pass">Forgot password?</a>
+                        <a href="#" class="forgot-pass" id="#forgot-pass">Forgot password?</a>
                         <button type="submit">Log In</button>
                     </form>
                     <div class="bottom-link">
@@ -82,6 +82,28 @@
             </div>
         </section>
     </main>
+    <!-- Change Password Pop-Up -->
+    <div id="change-password-popup" class="popup hidden">
+        <div class="popup-content" id="popup-content">
+            <h2>Change Password</h2>
+            <form id="change-password-form">
+                <div class="input-field">
+                    <input type="text" id="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="old-password" required>
+                    <label>Old Password</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="new-password" required>
+                    <label>New Password</label>
+                </div>
+                <button type="submit" id="submit-change-password">Submit</button>
+            </form>
+            <button id="close-popup" class="close-button">X</button>
+        </div>
+    </div>
 
     <!-- Music -->
     <audio id="background-music" autoplay loop>
@@ -91,6 +113,10 @@
     <!-- JavaScript -->
     <script src="./login.js"></script>
     <script src="../script.js"></script>
+    <script src="./forgot-pass.js"></script>
+
+
+
 
 </body>
 

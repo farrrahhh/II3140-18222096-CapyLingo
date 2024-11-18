@@ -112,7 +112,7 @@ nextButton.addEventListener("click", () => {
   if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
-    showScore();
+    submitQuizResult();
   }
 });
 
@@ -124,6 +124,10 @@ async function submitQuizResult() {
     alert("User or Quiz not identified");
     return;
   }
+
+  // Show the loading spinner while waiting for the result to be submitted
+  const loadingIndicator = document.getElementById("loading-indicator");
+  loadingIndicator.style.display = "flex";
 
   try {
     const response = await fetch("https://capy-lingo-backend.vercel.app/api/submit-quiz", {
@@ -141,6 +145,8 @@ async function submitQuizResult() {
     });
 
     const result = await response.json();
+    // Hide the loading spinner once the request is complete
+    loadingIndicator.style.display = "none";
     if (response.ok) {
       sessionStorage.setItem("level", result.newLevel); // Update the level in sessionStorage
       alert(result.message);
@@ -150,7 +156,10 @@ async function submitQuizResult() {
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred while submitting the quiz result. Please try again.");
+    // Hide the loading spinner in case of error
+    loadingIndicator.style.display = "none";
   }
+  showScore();
 }
 
 function showScore() {
@@ -158,7 +167,7 @@ function showScore() {
   questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
   if (score >= 2 && sessionStorage.getItem("level") < 5 && sessionStorage.getItem("level") == sessionStorage.getItem("quizId")) {
     questionElement.innerHTML += "<br>You passed the quiz! Your level is increased.";
-  } else if (score >= 2 && sessionStorage.getItem("level") == 5) {
+  } else if (score >= 2 && sessionStorage.getItem("level") == 5 && sessionStorage.getItem("quizId" == 5)) {
     questionElement.innerHTML += "<br>You have completed all levels!";
     questionElement.innerHTML += "<br>Capybara says: Congratulations!";
 
@@ -184,7 +193,6 @@ function showScore() {
   indicatorElement.innerHTML = `Quiz Complete`;
 
   // Submit the quiz result to the backend only once
-  submitQuizResult();
 
   nextButton.innerHTML = "Restart";
   nextButton.removeEventListener("click", showQuestion); // Remove previous event listener

@@ -8,6 +8,7 @@ import quizzesRoute from "./api/quiz/quizzes.js";
 import verifyTokenRoute from "./api/verifyToken.js"; // Rute untuk verifikasi token
 import signupRoute from "./api/auth/signup.js"; // Rute untuk signup
 import loginRoute from "./api/auth/login.js"; // Rute untuk login
+import changePasswordRoute from "./api/auth/changepassword.js"; // Rute untuk mengganti password
 
 import db from "./config.js"; // Pastikan config.js mengatur koneksi db
 
@@ -26,6 +27,7 @@ app.use("/api/quizzes", quizzesRoute);
 app.use("/api/verify-token", verifyTokenRoute); // Rute untuk verifikasi token
 app.use("/api/signup", signupRoute); // Rute untuk signup
 app.use("/api/login", loginRoute); // Rute untuk login
+app.use("/api/change-password", changePasswordRoute); // Rute untuk mengganti password
 
 // Endpoint untuk root atau home (opsional)
 app.get("/", (req, res) => {
