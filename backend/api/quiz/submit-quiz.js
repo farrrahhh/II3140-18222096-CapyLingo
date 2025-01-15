@@ -22,9 +22,9 @@ router.post("/", verifyToken, async (req, res) => {
     let updatedLevel = user.level;
 
     if (score >= passingScore && user.level < 5 && user.level == quizId) {
-      updatedLevel = user.level + 1;
+      updatedLevel = parseInt(user.level, 10) + 1; // Ubah level menjadi angka sebelum menambahkan 1
       await User.update({ level: updatedLevel }, { where: { user_id: userId } });
-
+    
       // Save the quiz result if it's the user's first attempt
       if (!quizresult) {
         await QuizResult.create({
