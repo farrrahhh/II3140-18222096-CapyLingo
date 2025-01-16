@@ -1,4 +1,3 @@
-// models/User.js
 import { DataTypes } from "sequelize";
 import db from "../config.js";
 
@@ -35,13 +34,13 @@ const User = db.define(
     },
     last_login: {
       type: DataTypes.DATE,
-      defaultValue: null,
+      defaultValue: null, // Menyimpan tanggal login terakhir
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Buat kolom created_at secara otomatis
     createdAt: "created_at",
-    updatedAt: false,
+    updatedAt: false, // Nonaktifkan kolom updated_at
   }
 );
 
