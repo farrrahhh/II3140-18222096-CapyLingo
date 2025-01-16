@@ -23,6 +23,20 @@ const User = db.define(
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
+    xp: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    day_streak: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    last_login: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
   },
   {
     timestamps: true,

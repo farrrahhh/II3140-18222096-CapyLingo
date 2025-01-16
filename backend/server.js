@@ -28,6 +28,8 @@ app.use("/api/verify-token", verifyTokenRoute); // Rute untuk verifikasi token
 app.use("/api/signup", signupRoute); // Rute untuk signup
 app.use("/api/login", loginRoute); // Rute untuk login
 app.use("/api/change-password", changePasswordRoute); // Rute untuk mengganti password
+app.use("/api/verify-token", verifyTokenRoute); // Rute untuk verifikasi token
+
 
 // Endpoint untuk root atau home (opsional)
 app.get("/", (req, res) => {

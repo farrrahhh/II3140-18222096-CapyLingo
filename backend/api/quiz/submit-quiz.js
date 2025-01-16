@@ -20,11 +20,15 @@ router.post("/", verifyToken, async (req, res) => {
     const quizresult = await QuizResult.findOne({ where: { [Op.and]: [{ user_id: userId }, { quiz_id: quizId }] } });
     const passingScore = 2;
     let updatedLevel = user.level;
+    let addedXp = score * 10;
 
     if (score >= passingScore && user.level < 5 && user.level == quizId) {
       updatedLevel = parseInt(user.level, 10) + 1; // Ubah level menjadi angka sebelum menambahkan 1
-      await User.update({ level: updatedLevel }, { where: { user_id: userId } });
-    
+      await User.update(
+        { level: updatedLevel, xp: user.xp + addedXp },
+        { where: { user_id: userId } }
+      );
+      
       // Save the quiz result if it's the user's first attempt
       if (!quizresult) {
         await QuizResult.create({
@@ -60,6 +64,7 @@ router.post("/", verifyToken, async (req, res) => {
       message: "Quiz result submitted successfully",
       newLevel: updatedLevel,
       score,
+      xp: user.xp + addedXp,
     });
   } catch (error) {
     console.error("Error during quiz result submission:", error);
