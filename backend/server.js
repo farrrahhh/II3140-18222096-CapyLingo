@@ -33,7 +33,7 @@ app.use("/api/verify-token", verifyTokenRoute); // Rute untuk verifikasi token
 
 // Endpoint untuk root atau home (opsional)
 app.get("/", (req, res) => {
-  res.send("Welcome to the Quiz API");
+  res.send("Welcome to the Quiz API Link Github: https://github.com/farrrahhh/II3140-18222096-CapyLingo");
 });
 
 // Fungsi untuk memulai server dan koneksi database
